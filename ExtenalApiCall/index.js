@@ -1,5 +1,5 @@
 const axios = require('axios');
-const apiKey = "3ce431dc7de8d5a65eb0f913d9b61350"; // weather api key (e.g. weatherstack.com)
+const apiKey = "ec599f6cc00e1013be51a97b8d3528a4"; // weather api key (e.g. weatherstack.com)
 const defaultLocationCityCountry = "Toronto, Canada";
 
 module.exports = async function (context, req) {
