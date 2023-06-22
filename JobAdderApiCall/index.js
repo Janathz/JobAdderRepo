@@ -35,7 +35,8 @@ module.exports = async function (context, req) {
     const apiBaseUrl = tokenResponse.data.api;
 
     // Step 4: Use the access token to make API requests
-    const apiUrl = `${apiBaseUrl}/API_ENDPOINT`;
+    const companyId = 123; // Replace with the actual company ID
+    const apiUrl = `${apiBaseUrl}/companies/${companyId}/jobs`;
     const headers = {
       Authorization: `Bearer ${accessToken}`
     };
