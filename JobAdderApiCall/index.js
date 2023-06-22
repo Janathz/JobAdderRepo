@@ -1,8 +1,8 @@
 const axios = require('axios');
 
-const clientId = 'CLIENT_ID';
-const clientSecret = 'CLIENT_SECRET';
-const redirectUri = 'REDIRECT_URI';
+const clientId = 'YOUR_CLIENT_ID';
+const clientSecret = 'YOUR_CLIENT_SECRET';
+const redirectUri = 'YOUR_REDIRECT_URI';
 const authorizationEndpoint = 'https://id.jobadder.com/connect/authorize';
 const tokenEndpoint = 'https://id.jobadder.com/connect/token';
 
@@ -11,7 +11,8 @@ module.exports = async function (context, req) {
 
   if (!code) {
     // Step 1: Redirect the user to the authorization URL
-    const authUrl = `${authorizationEndpoint}?response_type=code&client_id=${clientId}&scope=SCOPES&redirect_uri=${redirectUri}`;
+    const scope = 'read'; // Specify the desired scope(s) here
+    const authUrl = `${authorizationEndpoint}?response_type=code&client_id=${clientId}&scope=${scope}&redirect_uri=${redirectUri}`;
     context.res = {
       status: 302,
       headers: {
@@ -35,7 +36,7 @@ module.exports = async function (context, req) {
     const apiBaseUrl = tokenResponse.data.api;
 
     // Step 4: Use the access token to make API requests
-    const companyId = 123; // Replace with the actual company ID
+    const companyId = 123; // Replace with the actual company ID you want to retrieve jobs for
     const apiUrl = `${apiBaseUrl}/companies/${companyId}/jobs`;
     const headers = {
       Authorization: `Bearer ${accessToken}`
