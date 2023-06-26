@@ -1,8 +1,6 @@
 module.exports = async function (context, req) {
   try {
     const axios = require('axios');
-
-    // Define the base URL and query parameters separately
     const baseUrl = 'https://apps.jobadder.com/widgets/V1/Jobs/RenderJobList';
     const queryParams = {
       callback: 'jQuery36405312335243209085_1687376374712',
@@ -31,23 +29,16 @@ module.exports = async function (context, req) {
       classificationIDs: 215076,
       keywords: '',
       pageNumber: 1,
-      _: Date.now() // Add a dynamic parameter to avoid caching
+      _: Date.now()
     };
 
-    // Construct the final URL by appending the query parameters
     const apiUrl = `${baseUrl}?${Object.entries(queryParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&')}`;
 
     const response = await axios.get(apiUrl);
     const rawResponseData = response.data;
-
-    // Extract the job information from the raw response
     const regex = /jQuery\d+\_\d+\((.*)\);/;
     const matches = regex.exec(rawResponseData);
     const jsonData = JSON.parse(matches[1]);
-
-    // Handle the response data here
-    // ...
-
     const responseBody = JSON.stringify(jsonData);
     const headers = {
       'Content-Type': 'application/json'
